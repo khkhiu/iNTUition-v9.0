@@ -31,8 +31,8 @@ const nextShapeCanvas = document.getElementById("nextShapeCanvas");
 const scoreCanvas = document.getElementById("scoreCanvas");
 const image = document.getElementById("image");
 const ctx = canvas.getContext("2d");
-//const nctx = nextShapeCanvas.getContext("2d");
-//const sctx = scoreCanvas.getContext("2d");
+const nctx = nextShapeCanvas.getContext("2d");
+const sctx = scoreCanvas.getContext("2d");
 const squareCountX = canvas.width / size;
 const squareCountY = canvas.height / size;
 
@@ -225,6 +225,31 @@ let drawSquares = () => {
                 i*size,
                 size,
                 size
+            );
+        }
+    }
+};
+/*
+This function draws the next shape that will appear on the game board on the canvas located on the right side of the game board.
+It starts by filling the entire canvas with a solid color using fillRect() method. Then, it loops through each square of the next shape's template and checks if it's empty or not. If the square is not empty, it uses drawImage() method to draw the corresponding image of that shape's square onto the canvas.
+The nextShapeCanvas variable is a reference to the HTML canvas element on which the next shape is drawn. nctx is the 2D drawing context of that canvas. The size of each square is calculated using the size variable, which is based on the width of the game board divided by the number of squares in each row.
+*/
+let drawNextShape = () => {
+    nctx.fillStyle = "#bca0dc"
+    nctx.fillRect(0, 0, nextShapeCanvas.width, nextShapeCanvas.height);
+    for (let i = 0; i < nextShape.template.length; i++){
+        for (let j=0; j < nextShape.template.length; j++){
+            if (nextShape.template[i][j]==0) continue;
+            nctx.drawImage(
+                image,
+                nextShape.imageX,
+                nextShape.imageY,
+                imageSquareSize,
+                imageSquareSize,
+                size * i,
+                size * j + size,
+                size,
+                size,
             );
         }
     }
