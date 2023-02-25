@@ -88,6 +88,16 @@ let gameLoop = () => {
 
 let update = () => {};
 
+/*
+These are two JavaScript functions called "drawRect" and "drawBackground" that are used in a Tetris game to draw rectangles and the background of the game on the canvas.
+The drawRect function takes in four parameters - the x and y coordinates of the top-left corner of the rectangle, the width and height of the rectangle, and a color. The function then sets the fillStyle property of the 
+canvas context to the specified color and calls the fillRect() method of the canvas API to draw the rectangle onto the canvas.
+The drawBackground function first calls the drawRect function to draw a large rectangle that fills the entire canvas with a purple color. It then uses two for loops to draw a grid of white lines on the canvas, 
+representing the boundaries of each square on the game board.
+The first for loop draws vertical lines by calling drawRect for each line, with the x-coordinate set to the square size multiplied by the loop index minus the thickness of the white lines, and the y-coordinate set to 0. 
+The width of each line is set to the thickness of the white lines, and the height is set to the height of the canvas.
+The second for loop draws horizontal lines in the same way, but with the x-coordinate set to 0, and the y-coordinate set to the square size multiplied by the loop index minus the thickness of the white lines.
+*/
 let drawRect = (x, y, width, height, color) => {
     ctx.fillStyle = color;
     ctx.fillRect(x, y, width, height);
@@ -141,6 +151,12 @@ let drawCurrentTetris = () => {
     }
 };
 
+/* 
+This is a JavaScript function called "drawSquares" that draws all the squares on the game board onto a canvas using the HTML5 canvas API.
+The function loops through the gameMap array, which represents the game board, using a for loop. For each row in the gameMap, the function loops through the squares in that row using another for loop. If the square's imageX property is -1, it means that the 
+square is empty, so the function continues to the next square. Otherwise, the function uses the drawImage() method of the canvas API to draw the square image onto the canvas at the appropriate position.
+The drawImage() method takes several parameters, including the image object to use (in this case, the image of the square), the position of the image within the image object, the size of the square to draw, and the position of the square within the canvas.
+*/
 let drawSquares = () => {
     for (let i = 0; i < gameMap.length; i++) {
         let t = gameMap[i];
@@ -161,6 +177,12 @@ let drawSquares = () => {
     }
 };
 
+/*
+This is a JavaScript function called "draw" that clears the canvas, and then draws the background, all the squares on the game board, the current tetris shape, the next shape, and the score onto the canvas using other functions.
+The first line uses the clearRect() method of the canvas API to clear the entire canvas before redrawing everything. This is important to ensure that the canvas is always updated with the latest state of the game.
+The subsequent lines call other functions to draw the different components of the game, including the background, all the squares on the game board, the current tetris shape, the next shape, and the score.
+The last conditional statement checks if the game is over and, if so, calls the drawGameOver() function to draw a "game over" message on the canvas.
+*/
 let draw = () => {
  ctx.clearRect(0, 0, canvas.width, canvas.height);
  drawBackground();
@@ -172,7 +194,13 @@ let draw = () => {
     drawGameOver();
     }
 };
-
+/*
+These are two JavaScript functions called "getRandomShape" and "resetVars" that are used in a Tetris game to generate a random shape and reset the game variables.
+The getRandomShape function uses the Math.random() method to generate a random number between 0 and 1, multiplies it by the length of the shapes array, and then rounds down using the Math.floor() method. This gives a 
+random index of the shapes array, and the function returns a new object created from the corresponding shape object using Object.create(). This ensures that a new object is created instead of modifying the original shape object.
+The resetVars function resets the game variables to their initial state. It creates a two-dimensional array called initialTwoDArr that represents the game board, with each element initialized as an empty square. It then sets the score to 0 
+and sets the gameOver variable to false. The function then generates a new random currentShape and nextShape using the getRandomShape function, and sets the gameMap variable to the initialTwoDArr.
+*/
 let getRandomShape = () => {
     return Object.create(shapes[Math.floor(Math.random() * shapes.length)]);
   };
@@ -190,6 +218,6 @@ let getRandomShape = () => {
     currentShape = getRandomShape();
     nextShape = getRandomShape();
     gameMap = initialTwoDArr;
-  };
+};
 
 gameLoop()
