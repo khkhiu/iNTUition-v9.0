@@ -92,7 +92,6 @@ let drawRect = (x, y, width, height, color) => {
     ctx.fillStyle = color;
     ctx.fillRect(x, y, width, height);
   };
-  
   let drawBackground = () => {
     drawRect(0, 0, canvas.width, canvas.height, "#bca0dc");
     for (let i = 0; i < squareCountX + 1; i++) {
@@ -104,7 +103,6 @@ let drawRect = (x, y, width, height, color) => {
         "white"
       );
     }
-  
     for (let i = 0; i < squareCountY + 1; i++) {
       drawRect(
         0,
@@ -115,6 +113,26 @@ let drawRect = (x, y, width, height, color) => {
       );
     }
   };
+
+let drawCurrentTetris = () => {
+    for (let i = 0; i < currentShape.template.length; i++){
+        for (let j = 0; j < currentShape.template.length; j++){
+            if (currentShape.template[i][j]==0)continue;
+            ctx.drawImage(
+                image,
+                currentShape.imageX,
+                currentShape.imageY,
+                imageSquareSize,
+                imageSquareSize,
+                Math.trunc(currentShape.x)*size+size*i,
+                Math.trunc(currentShape.x)*size+size*j,
+                size,
+                size
+            )
+
+        }
+    }
+}
 
 let draw = () => {
  ctx.clearRect(0, 0, canvas.width, canvas.height);
