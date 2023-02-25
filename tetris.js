@@ -16,7 +16,8 @@ By using the Math.trunc() method, the function ensures that the position is alwa
     }
 /*
 This is a method for the Shape class that checks whether the shape can move down one square.
-It loops through all squares in the shape's template and for each non-empty square, it calculates its real position on the game map by adding the current shape's x and y position to its position in the template. It then checks if moving the square one square down would make it fall off the game map (i.e. its real y position + 1 >= squareCountY), or if there is already another square at the new position on the game map (i.e. gameMap[realY + 1][realX].imageX != -1).
+It loops through all squares in the shape's template and for each non-empty square, it calculates its real position on the game map by adding the current shape's x and y position to its position in the template. It then checks if moving the square one square down would make it fall off the game map 
+(i.e. its real y position + 1 >= squareCountY), or if there is already another square at the new position on the game map (i.e. gameMap[realY + 1][realX].imageX != -1).
 If any of these conditions is met, it returns false, indicating that the shape cannot move down any further. If none of these conditions is met for any square in the template, it returns true, indicating that the shape can move down one square.
 */
     checkBottom(){
@@ -35,10 +36,26 @@ If any of these conditions is met, it returns false, indicating that the shape c
         }
         return true;
     }
-
-
-
-    checkLeft(){}
+/*
+This method checkLeft() checks if the current shape can move left by checking each block of the shape against the gameMap. 
+It iterates over the template of the shape and calculates the real position of each block on the gameMap by adding the shape's position to the block's position in the template. It then checks if moving the shape one block to the left will result in any collision with existing blocks on the gameMap or if the shape is out of bounds. 
+If there is no collision and the shape is still within the bounds of the gameMap, it returns true, indicating that the shape can move left. Otherwise, it returns false.
+*/
+    checkLeft(){
+        for (let i = 0; i < this.template.length; i++) {
+            for (let j = 0; j < this.template.length; j++) {
+              if (this.template[i][j] == 0) continue;
+              let realX = i + this.getTruncedPosition().x;
+              let realY = j + this.getTruncedPosition().y;
+              if (realX - 1 < 0) {
+                return false;
+              }
+              if (gameMap[realY][realX - 1].imageX != -1) 
+              return false;
+            }
+          }
+          return true;
+    }
 
     checkRight(){}
 
