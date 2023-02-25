@@ -79,6 +79,7 @@ let currentShape;
 let nextShape;
 let score;
 let initialTwoDArr;
+let whiteLineThickness = 4
 
 let gameLoop = () => {
     setInterval(update, 1000 / gameSpeed);
