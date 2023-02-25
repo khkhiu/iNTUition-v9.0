@@ -75,14 +75,47 @@ If any cell to the left or right of the shape is already occupied, the method re
           }
           return true;
     }
+/*
+These are methods that move the current shape to the left, right, and bottom. They use the checkLeft(), checkRight(), and checkBottom() methods to ensure that the shape can be moved in the desired direction without colliding with other shapes or going out of bounds.
+If the movement is allowed, the moveLeft(), moveRight(), and moveBottom() methods update the position of the shape accordingly, and in the case of moveBottom(), also increase the player's score.
+*/
+    moveBottom(){
+        if (this.checkBottom()){
+            this.y += 1;
+            score += 1;
+        }
+    }
 
-    moveBottom(){}
+    moveLeft() {
+        if (this.checkLeft()) {
+          this.x -= 1;
+        }
+    }
 
-    moveLeft(){}
+    moveRight() {
+        if (this.checkRight()) {
+          this.x += 1;
+        }
+    }
 
-    moveRight(){}
-
-    changeRotation() {}
+    changeRotation() {
+        let tempTemplate = [];
+        for (let i = 0; i < this.template.length; i++)
+            tempTemplate[i] = this.template[i].slice();
+        let n = this.template.lengthl
+        for (let layer = 0; layer < n/2; layer ++){
+            let first = layer;
+            let last = n - 1 - layer;
+            for (let i = first; i < last; i++){
+                let offset = i - first;
+                let top = this.template[first][i];
+                this.template[first][i] = this.template[i][last]; // top == right
+                this.template[i][last] = this.template[last][last - offset]; //right = bottom
+                this.template[last][last - offset] = this.template[last - offset][first]; //bottom = left
+                this.template[last - offset][first] = top; // left = top
+            }
+        }
+    }
 }
 
 const imageSquareSize = 24;
