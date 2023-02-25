@@ -254,7 +254,23 @@ let drawNextShape = () => {
         }
     }
 };
+/* 
+These are two functions that draw the score and "Game Over" text on their respective canvas elements.
+drawScore clears the score canvas and then uses the fillText method to display the current score in black color using the Poppins font with a size of 64 pixels.
+drawGameOver displays the "Game Over!" text in the center of the canvas using the fillText method with the same font and size as drawScore. The text color is also black.
+*/
+let drawScore = () => {
+    sctx.clearRect(0, 0, scoreCanvas.width, scoreCanvas.height);
+    sctx.font = "64px Poppins";
+    sctx.fillStyle = "black";
+    sctx.fillText(score, 10, 50);
+};
 
+let drawGameOver = () => {
+    sctx.font = "64px Poppins";
+    sctx.fillStyle = "black";
+    sctx.fillText("Game Over!", 10, canvas.height/2);
+};
 /*
 This is a JavaScript function called "draw" that clears the canvas, and then draws the background, all the squares on the game board, the current tetris shape, the next shape, and the score onto the canvas using other functions.
 The first line uses the clearRect() method of the canvas API to clear the entire canvas before redrawing everything. This is important to ensure that the canvas is always updated with the latest state of the game.
