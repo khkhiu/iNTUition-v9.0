@@ -18,5 +18,6 @@ Players use the arrow keys to play the game.
 
 ***
 (Please excuse the game play, I am filming only for demonstrations purposes.)
+
 [![iNTUition v9.0 demonstration](http://img.youtube.com/vi/hKilWgW8UwE/0.jpg)](http://www.youtube.com/watch?v=hKilWgW8UwE)
 
