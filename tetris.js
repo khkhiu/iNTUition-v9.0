@@ -116,8 +116,34 @@ let deleteCompleteRows = () => {
         }
     }
 };
+/*
+This JavaScript code defines an update function that is called continuously to update the game state. The function first checks if the game is over, and if it is, it returns immediately. 
+If the current tetris shape can move down, its y position is incremented by one. Otherwise, the function loops through each square in the tetris shape's template and adds it to the game map at its current position, using the getTruncedPosition method to round the position to the nearest integer values. 
+Then, it calls the deleteCompleteRows function to remove any completed rows from the game map and update the score. Finally, it sets the current shape to be the next shape and generates a new next shape. If the new current shape cannot move down, the game is over. The function adds 100 points to the score after each move.
+*/
+let update = () => {
+    if (gameOver) return;
+    if (currentShape.checkBottom()){
+        currentShape.y += 1;
+    } else {
+        for (let k = 0; k < currentShape.template.length;k++){
+            for (let l = 0; l < currentShape.template.length;l++){
+                if (currentShape.template[k][l]==0) continue;
+                gameMap[currentShape.getTruncedPosition().y + l][
+                    currentShape.getTruncedPosition().x + l
+                ] = {imageX: currentShape.imageX, imageY: currentShape.imageY};
+            }
+        }
 
-let update = () => {};
+        deleteCompleteRows();
+        currentShape = nextShape;
+        nextShape = getRandomShape();
+        if (!currentShape.checkBottom()) {
+            gameOver =true;
+        }
+        score += 100;
+    }
+};
 
 /*
 These are two JavaScript functions called "drawRect" and "drawBackground" that are used in a Tetris game to draw rectangles and the background of the game on the canvas.
@@ -131,8 +157,9 @@ let drawRect = (x, y, width, height, color) => {
     ctx.fillStyle = color;
     ctx.fillRect(x, y, width, height);
   };
-  let drawBackground = () => {
-    drawRect(0, 0, canvas.width, canvas.height, "#bca0dc");
+
+let drawBackground = () => {
+   drawRect(0, 0, canvas.width, canvas.height, "#bca0dc");
     for (let i = 0; i < squareCountX + 1; i++) {
       drawRect(
         size * i - whiteLineThickness,
@@ -151,7 +178,7 @@ let drawRect = (x, y, width, height, color) => {
         "white"
       );
     }
-  };
+};
 
 /* 
 This is a JavaScript function called "drawCurrentTetris" that draws the current tetris shape onto a canvas using the HTML5 canvas API.
