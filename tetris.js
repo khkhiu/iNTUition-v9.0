@@ -141,6 +141,26 @@ let drawCurrentTetris = () => {
     }
 };
 
+let drawSquares = () => {
+    for (let i = 0; i < gameMap.length; i++) {
+        let t = gameMap[i];
+        for (let j = 0; j < t.length; j++){
+            if (t[j].imageX == -1) continue;
+            ctx.drawImage(
+                image,
+                t[j].imageX,
+                t[j].imageY,
+                imageSquareSize,
+                imageSquareSize,
+                j*size,
+                i*size,
+                size,
+                size
+            );
+        }
+    }
+};
+
 let draw = () => {
  ctx.clearRect(0, 0, canvas.width, canvas.height);
  drawBackground();
