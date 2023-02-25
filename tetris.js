@@ -56,8 +56,25 @@ If there is no collision and the shape is still within the bounds of the gameMap
           }
           return true;
     }
-
-    checkRight(){}
+/*
+These methods are used to check if the current shape can move left or right respectively without colliding with any other shapes on the game map. They iterate over the shape's template and check the corresponding cells on the game map to see if they are empty or not. 
+If any cell to the left or right of the shape is already occupied, the method returns false, indicating that the shape cannot move in that direction. Otherwise, it returns true.
+*/
+    checkRight(){
+        for (let i = 0; i < this.template.length; i++) {
+            for (let j = 0; j < this.template.length; j++) {
+              if (this.template[i][j] == 0) continue;
+              let realX = i + this.getTruncedPosition().x;
+              let realY = j + this.getTruncedPosition().y;
+              if (realX + 1 >= squareCountX) {
+                return false;
+              }
+              if (gameMap[realY][realX + 1].imageX != -1) 
+              return false;
+            }
+          }
+          return true;
+    }
 
     moveBottom(){}
 
