@@ -17,6 +17,6 @@ Players use the arrow keys to play the game.
 <strong>Video demonstration</strong>
 
 ***
-(Please excuse the gameplay, I am filming only for demonstrations purposes.)
+(Please excuse the game play, I am filming only for demonstrations purposes.)
+[![iNTUition v9.0 demonstration](http://img.youtube.com/vi/hKilWgW8UwE/0.jpg)](http://www.youtube.com/watch?v=hKilWgW8UwE)
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/hKilWgW8UwE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
