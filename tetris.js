@@ -87,6 +87,15 @@ let gameLoop = () => {
 
 let update = () => {};
 
+let drawRect = () => {
+    ctx.fillStyle = color;
+    ctx.fillRect(x, y, width, height);
+};
+
+let drawBackground = () => {
+    
+};
+
 let draw = () => {
  ctx.clearRect(0, 0, canvas.width, canvas.height);
  drawBackground();
