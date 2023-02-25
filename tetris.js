@@ -97,7 +97,11 @@ If the movement is allowed, the moveLeft(), moveRight(), and moveBottom() method
           this.x += 1;
         }
     }
-
+/*
+This is a method that handles the rotation of the current shape. It first creates a copy of the current shape's template to a temporary array. Then, it rotates the shape's template by 90 degrees clockwise using a nested loop that iterates through each layer of the matrix, swapping elements in a pattern. Finally, it checks if the rotated shape is out of bounds and if it is, reverts the template back to its original state.
+The method works by using a temporary array to store the current template of the shape, allowing it to be rotated without affecting the original state of the shape. The nested loop iterates through each layer of the matrix, starting from the outermost layer, swapping elements in a specific pattern to rotate the shape 90 degrees clockwise. The algorithm used to rotate the elements is known as the "Layer-by-Layer" method.
+After rotating the shape, the method checks if the shape is out of bounds by iterating through each element of the rotated template and calculating its real-world coordinates on the game board. If any of the elements are out of bounds, the method reverts the shape back to its original state and returns false, indicating that the rotation was unsuccessful.
+*/
     changeRotation() {
         let tempTemplate = [];
         for (let i = 0; i < this.template.length; i++)
@@ -113,6 +117,18 @@ If the movement is allowed, the moveLeft(), moveRight(), and moveBottom() method
                 this.template[i][last] = this.template[last][last - offset]; //right = bottom
                 this.template[last][last - offset] = this.template[last - offset][first]; //bottom = left
                 this.template[last - offset][first] = top; // left = top
+            }
+        }
+
+        for (let i = 0; i < this.template.length; i++){
+            for (let j = 0; j < this.template.length; j++){
+                if (this.template[i][j] == 0) continue;
+                let realX = i + this.getTruncedPosition().x;
+                let realY = j + this.getTruncedPosition().y;
+                if (realX < 0 || realX >= squareCountX || realY < 0 || realY >= squareCountY) {
+                    this.template = tempTemplate;
+                    return false;
+                }
             }
         }
     }
