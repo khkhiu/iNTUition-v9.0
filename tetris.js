@@ -297,7 +297,7 @@ Overall, these functions are important in a Tetris game as they handle the rando
 let getRandomShape = () => {
     return Object.create(shapes[Math.floor(Math.random() * shapes.length)]);
   };
-  let resetVars = () => {
+let resetVars = () => {
     initialTwoDArr = [];
     for (let i = 0; i < squareCountY; i++) {
       let temp = [];
@@ -312,5 +312,20 @@ let getRandomShape = () => {
     nextShape = getRandomShape();
     gameMap = initialTwoDArr;
 };
+/*
+This code adds an event listener to the window object to listen for keyboard inputs. When a key is pressed, the code checks which key was pressed using the keyCode property of the event object. 
+If the left arrow key (key code 37) is pressed, it calls the moveLeft() method of the currentShape object. 
+If the up arrow key (key code 38) is pressed, it calls the changeRotation() method of the currentShape object.
+If the right arrow key (key code 39) is pressed, it calls the moveRight() method of the currentShape object. 
+Finally, if the down arrow key (key code 40) is pressed, it calls the moveBottom() method of the currentShape object. 
+These methods are responsible for updating the position or rotation of the current tetris shape on the canvas.
+*/
+window.addEventListener("keydown", (event)=> {
+    if (event.keyCode == 37) currentShape.moveLeft();
+    else if (event.keyCode == 38) currentShape.changeRotation();
+    else if (event.keyCode == 39) currentShape.moveRight();
+    else if (event.keyCode == 40) currentShape.moveBottom();
+});
 
+resetVars()
 gameLoop()
