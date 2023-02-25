@@ -114,6 +114,14 @@ let drawRect = (x, y, width, height, color) => {
     }
   };
 
+/* 
+This is a JavaScript function called "drawCurrentTetris" that draws the current tetris shape onto a canvas using the HTML5 canvas API.
+The function loops through the current tetris shape's template (which is an array of arrays that represents the shape) using a nested for loop. 
+For each element in the template, if the value is 0, the function continues to the next element. Otherwise, the function uses the drawImage() method of the canvas API to draw a 
+square image of the tetris block onto the canvas at the appropriate position.
+The drawImage() method takes several parameters, including the image object to use (in this case, the image of the tetris block), 
+the position of the image within the image object, the size of the square to draw, and the position of the square within the canvas.
+*/
 let drawCurrentTetris = () => {
     for (let i = 0; i < currentShape.template.length; i++){
         for (let j = 0; j < currentShape.template.length; j++){
@@ -128,11 +136,10 @@ let drawCurrentTetris = () => {
                 Math.trunc(currentShape.x)*size+size*j,
                 size,
                 size
-            )
-
+            );
         }
     }
-}
+};
 
 let draw = () => {
  ctx.clearRect(0, 0, canvas.width, canvas.height);
