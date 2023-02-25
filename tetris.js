@@ -36,6 +36,7 @@ const sctx = scoreCanvas.getContext("2d");
 const squareCountX = canvas.width / size;
 const squareCountY = canvas.height / size;
 
+//Setting tetris shapes
 const shapes = [
     new Tetris(0, 120, [
       [0, 1, 0],
@@ -83,6 +84,7 @@ let score;
 let initialTwoDArr;
 let whiteLineThickness = 4
 
+//Setting game speed
 let gameLoop = () => {
     setInterval(update, 1000 / gameSpeed);
     setInterval(draw, 1000 / framePerSecond);
@@ -157,7 +159,6 @@ let drawRect = (x, y, width, height, color) => {
     ctx.fillStyle = color;
     ctx.fillRect(x, y, width, height);
   };
-
 let drawBackground = () => {
    drawRect(0, 0, canvas.width, canvas.height, "#bca0dc");
     for (let i = 0; i < squareCountX + 1; i++) {
@@ -296,7 +297,7 @@ Overall, these functions are important in a Tetris game as they handle the rando
 */
 let getRandomShape = () => {
     return Object.create(shapes[Math.floor(Math.random() * shapes.length)]);
-  };
+};
 let resetVars = () => {
     initialTwoDArr = [];
     for (let i = 0; i < squareCountY; i++) {
