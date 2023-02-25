@@ -6,8 +6,37 @@ class Tetris {
         this.x = squareCountX / 2;
         this.y = 0;
     }
+/*
+The getTruncedPosition method returns the current position of the shape rounded down to the nearest integer values for the x and y coordinates. It is used in other methods of 
+the Shape class to get the position of the shape on the gameMap array, which requires integer values for the array indices. 
+By using the Math.trunc() method, the function ensures that the position is always rounded down, which is important for the proper functioning of the game logic.
+*/
+    getTruncedPosition(){
+        return { x: Math.trunc(this.x), y: Math.trunc(this.y)};
+    }
+/*
+This is a method for the Shape class that checks whether the shape can move down one square.
+It loops through all squares in the shape's template and for each non-empty square, it calculates its real position on the game map by adding the current shape's x and y position to its position in the template. It then checks if moving the square one square down would make it fall off the game map (i.e. its real y position + 1 >= squareCountY), or if there is already another square at the new position on the game map (i.e. gameMap[realY + 1][realX].imageX != -1).
+If any of these conditions is met, it returns false, indicating that the shape cannot move down any further. If none of these conditions is met for any square in the template, it returns true, indicating that the shape can move down one square.
+*/
+    checkBottom(){
+        for (let i = 0; i < this.template.length; i++){
+            for (let j = 0; j < this.template.length; j++){
+                if (this.template[i][j] == 0) continue;
+                let realX = i + this.getTruncedPosition().x;
+                let realY = j + this.getTruncedPosition().y;
+                if (realY +1 >= squareCountY){
+                    return false;
+                }
+                if (gameMap[realY + 1][realX].imageX != -1){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 
-    checkBottom(){}
+
 
     checkLeft(){}
 
